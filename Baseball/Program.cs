@@ -16,22 +16,24 @@ namespace Baseball
 
             Console.WriteLine("NUMBERS");
             int[] numbers = { 3, 1, 9 };
-            Console.WriteLine(numbers[0]);
-            Console.WriteLine(numbers[1]);
-            Console.WriteLine(numbers[2]);
+
+            for(int i = 0; i < 3; i++)
+            {
+                Console.WriteLine(numbers[i]);
+            }
 
             int[] guesses = new int[3];
+            string[] input_message = { " > Input First Number", " > Input Second Number", " > Input Third Number" };
 
             while (true)
             {
-                Console.WriteLine(" > Input First Number");
-                guesses[0] = int.Parse(Console.ReadLine());
-                Console.WriteLine(" > Input Second Number");
-                guesses[1] = int.Parse(Console.ReadLine());
-                Console.WriteLine(" > Input Third Number");
-                guesses[2] = int.Parse(Console.ReadLine());
+                for(int i = 0; i < 3; i++)
+                {
+                    Console.WriteLine(input_message[i]);
+                    guesses[i] = int.Parse(Console.ReadLine());
+                }
 
-                if (guesses[0] == guesses[1] || guesses[1] == guesses[2] || guesses[0] == guesses[3])
+                if (guesses[0] == guesses[1] || guesses[1] == guesses[2] || guesses[0] == guesses[2])
                 {
                     Console.WriteLine("Same Number");
                     continue;
@@ -39,41 +41,31 @@ namespace Baseball
                 else
                 {
                     Console.WriteLine(" > Input Numbers");
-                    Console.WriteLine(guesses[0]);
-                    Console.WriteLine(guesses[1]);
-                    Console.WriteLine(guesses[2]);
+                    for(int j = 0; j < 3; j++)
+                    {
+                        Console.WriteLine(guesses[j]);
+                    }
 
                     int strikeCount = 0;
                     int ballCount = 0;
 
-                    // guess1
-                    if (guesses[0] == numbers[0])
+                    for(int i = 0; i < 3; i++)
                     {
-                        strikeCount = strikeCount + 1;
-                    }
-                    else if (guesses[0] == numbers[1] || guesses[0] == numbers[2])
-                    {
-                        ballCount = ballCount + 1;
-                    }
+                        for(int j = 0; j < 3; j++)
+                        {
+                            if(guesses[i] == numbers[j])
+                            {
+                                if(i == j)
+                                {
+                                    strikeCount++;
+                                }
 
-                    // guess2
-                    if (guesses[1] == numbers[1])
-                    {
-                        strikeCount = strikeCount + 1;
-                    }
-                    else if (guesses[1] == numbers[0] || guesses[1] == numbers[2])
-                    {
-                        ballCount = ballCount + 1;
-                    }
-
-                    // guess3
-                    if (guesses[2] == numbers[2])
-                    {
-                        strikeCount = strikeCount + 1;
-                    }
-                    else if (guesses[2] == numbers[1] || guesses[2] == numbers[0])
-                    {
-                        ballCount = ballCount + 1;
+                                else
+                                {
+                                    ballCount++;
+                                }
+                            }
+                        }
                     }
 
                     Console.Write("Strike : ");
@@ -83,7 +75,7 @@ namespace Baseball
                     Console.Write("Out : ");
                     Console.WriteLine(3 - strikeCount - ballCount);
 
-                    if (guesses[0] == numbers[0] && guesses[1] == numbers[1] && guesses[2] == numbers[2])
+                    if (strikeCount == 3)
                     {
                         Console.WriteLine("CORRECT!");
                         break;
