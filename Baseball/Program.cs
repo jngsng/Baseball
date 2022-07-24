@@ -14,8 +14,30 @@ namespace Baseball
             Console.WriteLine("=========================BASEBALL=========================");
             Console.WriteLine("==========================================================");
 
+            Random rnd = new Random();
+            int[] numbers = new int[3];
+            int index = 0;
+
+            while(index < 3)
+            {
+                numbers[index] = rnd.Next(0, 10);
+
+                bool hasDuplicate = false;
+                for(int i = 0; i < index; i++)
+                {
+                    if (numbers[index] == numbers[i])
+                    {
+                        hasDuplicate = true;
+                        break;
+                    }
+                }
+
+                if (!hasDuplicate)
+                {
+                    index++;
+                }
+            }
             Console.WriteLine("NUMBERS");
-            int[] numbers = { 3, 1, 9 };
 
             for(int i = 0; i < 3; i++)
             {
